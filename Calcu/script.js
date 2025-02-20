@@ -1,21 +1,24 @@
-function appendToDisplay(value) {
-    document.querySelector('.display').value += value;
+function insert(value) {
+    let display = document.getElementById("display");
+    if (value === 'pi') {
+        display.value += Math.PI;
+    } else if (value === 'e') {
+        display.value += Math.E;
+    } else {
+        display.value += value;
+    }
 }
 
 function clearDisplay() {
-    document.querySelector('.display').value = '';
+    document.getElementById("display").value = "";
 }
 
-function deleteLast() {
-    const display = document.querySelector('.display');
-    display.value = display.value.slice(0, -1);
-}
-
-function calculateResult() {
+function calculate() {
+    let display = document.getElementById("display").value;
+    display = display.replace(/\^/g, '**'); // Reemplazar ^ por ** para potencias
     try {
-        const display = document.querySelector('.display');
-        display.value = eval(display.value);
-    } catch {
-        display.value = 'Error';
+        document.getElementById("display").value = eval(display);
+    } catch (error) {
+        document.getElementById("display").value = "Error";
     }
 }
